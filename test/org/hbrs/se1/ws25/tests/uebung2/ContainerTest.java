@@ -1,13 +1,8 @@
 package org.hbrs.se1.ws25.tests.uebung2;
 
-import org.hbrs.se1.ws25.exercises.uebung2.Container;
-import org.hbrs.se1.ws25.exercises.uebung2.ConcreteMember;
-import org.hbrs.se1.ws25.exercises.uebung2.ContainerException;
-
-import org.junit.Rule;
+import org.hbrs.se1.ws25.exercises.uebung2.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ContainerTest {
@@ -30,6 +25,15 @@ public class ContainerTest {
 
         container.addMember(member2);
         assertEquals(2, container.size());
+    }
+
+    @Test
+    public void addNegativeMemberTest() {
+        ContainerException cex = assertThrows(ContainerException.class, () -> container.addMember(new ConcreteMember(0)));
+        assertTrue(cex.getMessage().contains("Das Member-Objekt ist ungültig!"));
+
+        ContainerException cex2 = assertThrows(ContainerException.class, () -> container.addMember(new ConcreteMember(-1)));
+        assertTrue(cex2.getMessage().contains("Das Member-Objekt ist ungültig!"));
     }
 
     @Test

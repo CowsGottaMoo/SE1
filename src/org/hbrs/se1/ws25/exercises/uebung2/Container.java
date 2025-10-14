@@ -6,6 +6,9 @@ public class Container {
     private List<Member> members = new java.util.ArrayList<>();
 
     public void addMember(Member member) throws ContainerException {
+        if(member.getID()<1 || member == null){
+            throw new ContainerException("Das Member-Objekt ist ungültig!");
+        }
         for (Member m : members) {
             if (m.getID().equals(member.getID())) {
                 throw new ContainerException("Das Member-Objekt mit der ID " + member.getID() + " ist bereits vorhanden!");
