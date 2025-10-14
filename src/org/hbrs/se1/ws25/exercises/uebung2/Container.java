@@ -15,12 +15,15 @@ public class Container {
     }
 
     public void deleteMember(Integer id){
+        int size = members.size();
         for (Member m : members) {
             if(m.getID().equals(id)){
                 members.remove(m);
-            } else{
-                System.out.println("Das Member-Objekt mit der ID " + id + " ist nicht vorhanden!");
+                break;
             }
+        }
+        if(size == members.size()){
+            System.out.println("Das Member-Objekt mit der ID " + id + " ist nicht vorhanden!");
         }
     }
 

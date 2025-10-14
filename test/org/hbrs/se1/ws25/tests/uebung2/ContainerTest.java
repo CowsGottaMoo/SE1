@@ -44,7 +44,7 @@ public class ContainerTest {
         container.addMember(member1);
         container.addMember(member2);
 
-        container.deleteMember(2);
+        container.deleteMember(1);
         assertEquals(1, container.size());
 
         container.deleteMember(3);
@@ -58,6 +58,20 @@ public class ContainerTest {
 
         assertEquals("Member (ID = 1)", member1.toString());
         assertEquals("Member (ID = 2)", member2.toString());
+    }
+
+    @Test
+    public void testComplete() throws ContainerException {
+        container.addMember(member1);
+        container.addMember(member2);
+        assertEquals(2, container.size());
+
+        ContainerException cex = assertThrows(ContainerException.class, () -> container.addMember(new ConcreteMember(2)));
+        assertTrue(cex.getMessage().contains("Das Member-Objekt mit der ID 2 ist bereits vorhanden!"));
+        assertEquals(2, container.size());
+
+        container.deleteMember(2);
+        assertEquals(1, container.size());
     }
 
 
